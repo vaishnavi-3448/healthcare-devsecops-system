@@ -17,10 +17,10 @@ pipeline {
         }
 
         stage('Container Security Scan') {
-            steps {
-                bat 'docker run --rm aquasec/trivy:latest image healthcare-app:latest'
-            }
-        }
+    steps {
+        bat 'trivy image --scanners vuln healthcare-app:latest'
+    }
+}
 
         stage('Deploy to Kubernetes') {
             steps {
