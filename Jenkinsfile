@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+    stages {
 
         stage('Code Security Scan') {
             steps {
@@ -17,7 +18,7 @@ pipeline {
 
         stage('Container Security Scan') {
             steps {
-                bat 'docker run --rm aquasec/trivy:latest image python:3.10-slim --scanners vuln'
+                bat 'docker run --rm aquasec/trivy:latest image healthcare-app:latest'
             }
         }
 
@@ -27,4 +28,12 @@ pipeline {
                 bat 'kubectl apply -f k8s/service.yaml'
             }
         }
+
+        stage('Verify Deployment') {
+            steps {
+                bat 'kubectl get pods'
+                bat 'kubectl get svc'
+            }
+        }
     }
+}
