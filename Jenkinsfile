@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/vaishnavi-g/healthcare-devsecops.git'
+                git 'https://github.com/vaishnavi-3448/healthcare-devsecops.git'
             }
         }
 
