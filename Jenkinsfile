@@ -17,20 +17,16 @@ pipeline {
         }
 
         stage('Container Security Scan') {
-    steps {
-        bat '''
-        docker run --rm ^
-        -v //var/run/docker.sock:/var/run/docker.sock ^
-        aquasec/trivy:latest image healthcare-app:latest
-        '''
-    }
-}
+            steps {
+                bat 'trivy image healthcare-app:latest'
+            }
+        }
 
         stage('Deploy to Kubernetes') {
-    steps {
-        bat 'kubectl apply -f k8s/deployment.yaml --validate=false'
-    }
-}
+            steps {
+                bat 'kubectl apply -f k8s/deployment.yaml --validate=false'
+            }
+        }
 
         stage('Verify Deployment') {
             steps {
