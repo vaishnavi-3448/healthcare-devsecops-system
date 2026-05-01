@@ -1,13 +1,6 @@
 pipeline {
     agent any
 
-    stages {
-
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/vaishnavi-3448/healthcare-devsecops-system'
-            }
-        }
 
         stage('Code Security Scan') {
             steps {
