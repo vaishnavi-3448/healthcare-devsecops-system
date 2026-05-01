@@ -18,7 +18,11 @@ pipeline {
 
         stage('Container Security Scan') {
     steps {
-        bat 'trivy image --scanners vuln healthcare-app:latest'
+        bat '''
+        docker run --rm ^
+        -v //var/run/docker.sock:/var/run/docker.sock ^
+        aquasec/trivy:latest image healthcare-app:latest
+        '''
     }
 }
 
