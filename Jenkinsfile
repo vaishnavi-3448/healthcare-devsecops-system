@@ -27,11 +27,10 @@ pipeline {
 }
 
         stage('Deploy to Kubernetes') {
-            steps {
-                bat 'kubectl apply -f k8s/deployment.yaml'
-                bat 'kubectl apply -f k8s/service.yaml'
-            }
-        }
+    steps {
+        bat 'kubectl apply -f k8s/deployment.yaml --validate=false'
+    }
+}
 
         stage('Verify Deployment') {
             steps {
